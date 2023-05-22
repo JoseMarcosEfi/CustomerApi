@@ -21,48 +21,50 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerRepository cr;
-	
+
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
-	public List<Customer> get(){
+	public List<Customer> get() {
 		return cr.findAll();
 	}
+
 	@RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Customer> getById(@PathVariable(value = "id")long id){
+	public ResponseEntity<Customer> getById(@PathVariable(value = "id") long id) {
 		Optional<Customer> custom = cr.findById(id);
-		if(custom.isPresent())
+		if (custom.isPresent())
 			return new ResponseEntity<Customer>(custom.get(), HttpStatusCode.valueOf(200));
 		else
 			return new ResponseEntity<>(HttpStatusCode.valueOf(404));
 	}
-	
+
 	@RequestMapping(value = "/customer", method = RequestMethod.POST)
 	public Customer post(@Validated @RequestBody Customer customer) {
-		
+
 		return cr.save(customer);
 	}
-	
+
 	@RequestMapping(value = "/customer/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Customer> put(@PathVariable(value = "id") Long id, @Validated @RequestBody Customer Newcustomer){
+	public ResponseEntity<Customer> put(@PathVariable(value = "id") Long id,
+			@Validated @RequestBody Customer Newcustomer) {
 		Optional<Customer> oldCustomer = cr.findById(id);
-		if(oldCustomer.isPresent()) {
+		if (oldCustomer.isPresent()) {
 			Customer customer = oldCustomer.get();
 			customer.setName(Newcustomer.getName());
 			customer.setCpf(Newcustomer.getCpf());
 			customer.setEmail(Newcustomer.getEmail());
 			customer.setPassword(Newcustomer.getPassword());
 			cr.save(customer);
-			return new ResponseEntity<Customer>(customer, HttpStatusCode.valueOf(200));	
-		}else 
+			return new ResponseEntity<Customer>(customer, HttpStatusCode.valueOf(200));
+		} else
 			return new ResponseEntity<>(HttpStatusCode.valueOf(404));
 	}
-	
+
 	@RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> delete(@PathVariable(value = "id")long id){
+	public ResponseEntity<Object> delete(@PathVariable(value = "id") long id) {
 		Optional<Customer> customer = cr.findById(id);
-		if(customer.isPresent()) {
+		if (customer.isPresent()) {
 			cr.delete(customer.get());
 			return new ResponseEntity<>(HttpStatusCode.valueOf(204));
-		}else
+		} else
 			return new ResponseEntity<>(HttpStatusCode.valueOf(404));
 	}
 }
