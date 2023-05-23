@@ -2,7 +2,6 @@ package com.api.customer.entities;
 
 import java.time.LocalDate;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
@@ -28,9 +27,5 @@ public class Customer {
 	private String password;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate creationDate = LocalDate.now();
-	
-		
-	
-	
-	
+
 }

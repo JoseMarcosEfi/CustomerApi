@@ -15,8 +15,8 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository cr;
 
-	public void createCustomer(Customer customer) {
-		cr.save(customer);
+	public Customer createCustomer(Customer customer) {
+		return cr.save(customer);
 	}
 
 	public List<Customer> fetchAllCustomers() {
