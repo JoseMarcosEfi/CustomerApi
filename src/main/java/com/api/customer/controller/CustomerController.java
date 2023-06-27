@@ -51,7 +51,7 @@ public class CustomerController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Customer> putCustomer(@PathVariable Long id, @Validated @RequestBody Customer customer) {
-		customer = cs.fetchCustomerById(id);
+		customer = cs.ChangeCustomer(id, customer);
 		if (customer != null) {
 			return ResponseEntity.ok().body(customer);
 		}

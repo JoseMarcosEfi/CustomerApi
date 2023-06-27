@@ -32,7 +32,7 @@ public class CustomerService {
 		Optional<Customer> optionalCustomer = cr.findById(id);
 		if (optionalCustomer.isPresent()) {
 			customer.setId(id);
-			cr.save(customer);
+			return cr.save(customer);
 		}
 		return null;
 	}
