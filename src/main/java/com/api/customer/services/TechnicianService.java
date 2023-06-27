@@ -3,6 +3,7 @@ package com.api.customer.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.customer.entities.Technician;
@@ -10,13 +11,14 @@ import com.api.customer.respositories.TechnicianRepository;
 
 @Service
 public class TechnicianService {
+    @Autowired
     private TechnicianRepository techRepo;
 
     public Technician createTech(Technician tech) {
         return techRepo.save(tech);
     }
 
-    public List<Technician> listAllTechs(int id) {
+    public List<Technician> listAllTechs() {
         return techRepo.findAll();
     }
 
