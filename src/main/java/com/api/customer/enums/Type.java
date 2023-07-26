@@ -5,14 +5,22 @@ public enum Type {
     PART(1),
     OTHERS(2);
 
-    private int Type;
+    private int typeCode;
 
     private Type(int type) {
-        this.Type = type;
+        this.typeCode = type;
     }
 
-    public int getTipo() {
-        return Type;
+    public int getType() {
+        return typeCode;
     }
 
+    public static Type valueOf(int typeCode) {
+        for (Type value : Type.values()) {
+            if (typeCode == value.getType()) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException("Invalid Type Code");
+    }
 }
