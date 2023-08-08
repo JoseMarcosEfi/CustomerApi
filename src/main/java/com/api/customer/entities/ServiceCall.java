@@ -31,7 +31,7 @@ public class ServiceCall {
     private String title;
     private BigDecimal value;
     private Integer idTechnician;
-    private Integer idCustomer;
+    private Long idCustomer;
     @Transient
     private String nameTechnician;
     @Transient

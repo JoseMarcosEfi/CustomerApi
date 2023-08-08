@@ -19,11 +19,11 @@ public class CustomerService {
 		return cr.save(customer);
 	}
 
-	public List<Customer> fetchAllCustomers() {
+	public List<Customer> findAllCustomers() {
 		return cr.findAll();
 	}
 
-	public Customer fetchCustomerById(Long id) {
+	public Customer findCustomerById(Long id) {
 		Optional<Customer> optionalCustomer = cr.findById(id);
 		return optionalCustomer.orElse(null);
 	}

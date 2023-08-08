@@ -27,7 +27,7 @@ public class CustomerController {
 
 	@GetMapping
 	public ResponseEntity<List<Customer>> getAllCustomers() {
-		List<Customer> customers = cs.fetchAllCustomers();
+		List<Customer> customers = cs.findAllCustomers();
 		if (customers.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
@@ -36,7 +36,7 @@ public class CustomerController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable(value = "id") long id) {
-		Customer customer = cs.fetchCustomerById(id);
+		Customer customer = cs.findCustomerById(id);
 		if (customer != null) {
 			return ResponseEntity.ok().body(customer);
 		}
