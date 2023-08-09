@@ -1,9 +1,9 @@
 package com.api.customer.enums;
 
 public enum Status {
-    LOW(0),
-    MEDIUM(1),
-    HIGH(2);
+    OPEN(0),
+    PROCESSING(1),
+    CLESED(2);
 
     private int statusCode;
 
