@@ -6,4 +6,5 @@ import com.api.customer.entities.ServiceCall;
 
 public interface ServiceCallRepository extends JpaRepository<ServiceCall, Integer> {
 
+    boolean existsByIdCustomer(Long idCustomer);
 }

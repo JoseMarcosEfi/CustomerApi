@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.customer.DTO.ServiceCallResponseDTO;
 import com.api.customer.entities.Customer;
 import com.api.customer.entities.ServiceCall;
 import com.api.customer.entities.Technician;
@@ -49,15 +50,18 @@ public class ServiceCallController {
     }
 
     @PostMapping
-    public ResponseEntity<ServiceCall> postServiceCall(@Validated @RequestBody ServiceCall sCall) {
+    public ResponseEntity<?> postServiceCall(@Validated @RequestBody ServiceCall sCall) {
         if (!isValidStatusAndPriority(sCall)) {
             ServiceCall errorServiceCall = new ServiceCall();
             errorServiceCall.setObservations("Invalid status or priority value.");
             return ResponseEntity.badRequest().body(errorServiceCall);
         }
-
-        ServiceCall newServiceCall = sCallService.createServiceCall(sCall);
-        return ResponseEntity.ok(newServiceCall);
+        try {
+            ServiceCallResponseDTO newServiceCall = sCallService.createServiceCall(sCall);
+            return ResponseEntity.ok().body(newServiceCall);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Error creating service call: " + e.getMessage());
+        }
     }
 
     private boolean isValidStatusAndPriority(ServiceCall sCall) {
@@ -70,4 +74,5 @@ public class ServiceCallController {
             return false;
         }
     }
+
 }
