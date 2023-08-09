@@ -20,5 +20,6 @@ public class ServiceCallResponseDTO {
     private BigDecimal value;
     private Integer idTechnician;
     private Long idCustomer;
-    private LocalDate openingDate;
+    private LocalDate closingDate;
+
 }

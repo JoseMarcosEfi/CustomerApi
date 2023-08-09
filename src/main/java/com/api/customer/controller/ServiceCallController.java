@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,6 +51,20 @@ public class ServiceCallController {
         return ResponseEntity.ok().body(listServiceCalls);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ServiceCall> GetById(@PathVariable(value = "id") int id) {
+        ServiceCall sCall = sCallService.FindById(id);
+        if (sCall != null) {
+            Technician technician = techService.findById(sCall.getIdTechnician());
+            Customer customer = customService.findCustomerById(sCall.getIdCustomer());
+
+            sCall.setNameTechnician(technician != null ? technician.getName() : "Technician deleted");
+            sCall.setNameCustomer(customer != null ? customer.getName() : "Customer deleted");
+            return ResponseEntity.ok().body(sCall);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
     public ResponseEntity<?> postServiceCall(@Validated @RequestBody ServiceCall sCall) {
         if (!isValidStatusAndPriority(sCall)) {
@@ -64,6 +80,16 @@ public class ServiceCallController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> putServiceCAll(@PathVariable(value = "id") int id,
+            @Validated @RequestBody ServiceCall sCall) {
+        sCall = sCallService.changeServiceCall(id, sCall);
+        if (sCall != null) {
+            return ResponseEntity.ok().body(sCall);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     private boolean isValidStatusAndPriority(ServiceCall sCall) {
         try {
             Status.valueOf(sCall.getStatus().getStatus());
@@ -73,6 +99,21 @@ public class ServiceCallController {
         } catch (IllegalArgumentException e) {
             return false;
         }
+    }
+
+    private ServiceCall convertToServiceCall(ServiceCallResponseDTO responseDTO) {
+        ServiceCall serviceCall = new ServiceCall();
+        serviceCall.setId(responseDTO.getId());
+        serviceCall.setPriority(responseDTO.getPriority());
+        serviceCall.setStatus(responseDTO.getStatus());
+        serviceCall.setObservations(responseDTO.getObservations());
+        serviceCall.setTitle(responseDTO.getTitle());
+        serviceCall.setValue(responseDTO.getValue());
+        serviceCall.setIdTechnician(responseDTO.getIdTechnician());
+        serviceCall.setIdCustomer(responseDTO.getIdCustomer());
+        serviceCall.setClosingDate(responseDTO.getClosingDate());
+
+        return serviceCall;
     }
 
 }
