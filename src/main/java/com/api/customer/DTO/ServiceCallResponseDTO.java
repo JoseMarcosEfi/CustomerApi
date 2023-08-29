@@ -18,7 +18,7 @@ public class ServiceCallResponseDTO {
     private String observations;
     private String title;
     private BigDecimal value;
-    private Integer idTechnician;
+    private Long idTechnician;
     private Long idCustomer;
     private LocalDate closingDate;
 

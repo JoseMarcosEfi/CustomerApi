@@ -1,4 +1,5 @@
 <h1>Customer API Project</h1>
+<h2>Project in progress...</h2>
 
 <h3>
 Project created to add professional value and demonstrate my technical skills in implementing real-world projects.</h3>
@@ -14,3 +15,7 @@ Project created to add professional value and demonstrate my technical skills in
 ## Link do frontEnd:
 
 <a href="https://github.com/JoseMarcosEfi/CustomerApiFront" >FrontEnd CustomerApi</a>
+
+## UML diagram of entities (Undergoing changes)
+
+![UML Customer](https://github.com/JoseMarcosEfi/CustomerApi/tree/main/PreviewumlCustomer.drawioDocumentation)

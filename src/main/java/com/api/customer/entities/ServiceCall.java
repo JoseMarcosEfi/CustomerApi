@@ -28,11 +28,11 @@ public class ServiceCall {
 
     private Priority priority;
     private Status status;
-    
+
     private String observations;
     private String title;
     private BigDecimal value;
-    private Integer idTechnician;
+    private Long idTechnician;
     private Long idCustomer;
     @Transient
     private String nameTechnician;

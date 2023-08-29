@@ -22,12 +22,12 @@ public class TechnicianService {
         return techRepo.findAll();
     }
 
-    public Technician findById(int id) {
+    public Technician findById(long id) {
         Optional<Technician> optionalTech = techRepo.findById(id);
         return optionalTech.orElse(null);
     }
 
-    public Technician changeTech(int id, Technician tech) {
+    public Technician changeTech(Long id, Technician tech) {
         Optional<Technician> optionalTech = techRepo.findById(id);
         if (optionalTech.isPresent()) {
             tech.setId(id);
@@ -36,7 +36,7 @@ public class TechnicianService {
         return null;
     }
 
-    public void deleteTech(int id) {
+    public void deleteTech(Long id) {
         techRepo.deleteById(id);
     }
 

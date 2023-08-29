@@ -51,7 +51,7 @@ public class TechnicianController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Technician> putTech(@PathVariable int id,
+    public ResponseEntity<Technician> putTech(@PathVariable Long id,
             @Validated @RequestBody Technician tech) {
         tech = tService.changeTech(id, tech);
         if (tech != null) {
@@ -61,7 +61,7 @@ public class TechnicianController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTech(@PathVariable int id) {
+    public ResponseEntity<Void> deleteTech(@PathVariable Long id) {
         tService.deleteTech(id);
         return ResponseEntity.noContent().build();
     }
