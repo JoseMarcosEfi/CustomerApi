@@ -18,4 +18,4 @@ Project created to add professional value and demonstrate my technical skills in
 
 ## UML diagram of entities (Undergoing changes)
 
-![UML Customer](https://github.com/JoseMarcosEfi/CustomerApi/tree/main/PreviewumlCustomer.drawioDocumentation)
+![UML Customer](https://github.com/JoseMarcosEfi/CustomerApi/blob/main/Documentation/PreviewumlCustomer.drawio.png?raw=true)
