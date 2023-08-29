@@ -25,8 +25,10 @@ public class ServiceCall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Priority priority;
     private Status status;
+    
     private String observations;
     private String title;
     private BigDecimal value;

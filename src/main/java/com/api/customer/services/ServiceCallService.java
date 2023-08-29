@@ -69,21 +69,4 @@ public class ServiceCallService {
 
     }
 
-    private void methodPutDontUse() {
-        // Optional<ServiceCall> optionalServiceCall = serviceCallRepo.findById(id);
-        // if (optionalServiceCall.isPresent()) {
-        // ServiceCall existingServiceCall = optionalServiceCall.get();
-        // Long idCustomer = sCall.getIdCustomer();
-
-        // if (!serviceCallRepo.existsByIdCustomer(idCustomer)) {
-        // throw new IllegalArgumentException("Customer ID does not exist.");
-        // }
-        // ServiceCall changeServiceCall = serviceCallRepo.save(existingServiceCall);
-        // ServiceCallResponseDTO responseDTO = convertToResponseDTO(changeServiceCall);
-
-        // return responseDTO;
-
-        // }
-        // return null;
-    }
 }
