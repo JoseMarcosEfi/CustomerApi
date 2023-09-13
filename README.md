@@ -32,7 +32,7 @@ Stay tuned for updates as we continue to refine and expand the capabilities of t
 <img align="denter" alt="Postgre" src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"/>
 </div>
 
-## Link do frontEnd:
+## Front-end link:
 
 <a href="https://github.com/JoseMarcosEfi/CustomerApiFront" >FrontEnd CustomerApi</a>
 
