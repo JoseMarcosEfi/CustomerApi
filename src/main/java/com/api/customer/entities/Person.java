@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +23,8 @@ public abstract class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
     protected String name;
+
+    @CPF
     protected String cpf;
     protected String email;
     protected String password;
