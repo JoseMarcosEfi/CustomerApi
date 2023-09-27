@@ -17,11 +17,14 @@ public class ServiceCallService {
     private ServiceCallRepository serviceCallRepo;
 
     public ServiceCallResponseDTO createServiceCall(ServiceCall sCall) {
-        Long idCustomer = sCall.getIdCustomer();
+        /*
+         * Long idCustomer = sCall.getIdCustomer();
+         * 
+         * if (!serviceCallRepo.existsByIdCustomer(idCustomer)) {
+         * throw new IllegalArgumentException("Customer ID does not exist.");
+         * }
+         */
 
-        if (!serviceCallRepo.existsByIdCustomer(idCustomer)) {
-            throw new IllegalArgumentException("Customer ID does not exist.");
-        }
         ServiceCall createdServiceCall = serviceCallRepo.save(sCall);
         ServiceCallResponseDTO responseDTO = convertToResponseDTO(createdServiceCall);
 
