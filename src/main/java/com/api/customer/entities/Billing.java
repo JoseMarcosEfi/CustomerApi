@@ -1,6 +1,5 @@
 package com.api.customer.entities;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +20,8 @@ public class Billing implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private BigDecimal totalValue;
-    private Integer idTechnician;
-    private Integer idCustomer;
+    private Long idTechnician;
+    private Long idCustomer;
     private Date initialDateBilling;
     private Date finalDateBilling;
     @Transient
