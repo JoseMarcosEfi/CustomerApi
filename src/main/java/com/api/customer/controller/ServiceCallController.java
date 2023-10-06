@@ -42,7 +42,7 @@ public class ServiceCallController {
         List<ServiceCall> listServiceCalls = this.sCallService.listAllServiceCall();
 
         for (ServiceCall serviceCall1 : listServiceCalls) {
-            Technician technician = techService.findById(serviceCall1.getIdTechnician());
+            Technician technician = techService.findTechById(serviceCall1.getIdTechnician());
             Customer customer = customService.findCustomerById(serviceCall1.getIdCustomer());
 
             serviceCall1.setNameTechnician(technician != null ? technician.getName() : "Technician Deleted!");
@@ -56,7 +56,7 @@ public class ServiceCallController {
     public ResponseEntity<ServiceCall> GetById(@PathVariable(value = "id") int id) {
         ServiceCall sCall = sCallService.FindById(id);
         if (sCall != null) {
-            Technician technician = techService.findById(sCall.getIdTechnician());
+            Technician technician = techService.findTechById(sCall.getIdTechnician());
             Customer customer = customService.findCustomerById(sCall.getIdCustomer());
 
             sCall.setNameTechnician(technician != null ? technician.getName() : "Technician deleted");

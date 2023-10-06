@@ -36,8 +36,8 @@ public class TechnicianController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Technician> getTechById(@PathVariable(value = "id") int id) {
-        Technician tech = tService.findById(id);
+    public ResponseEntity<Technician> getTechById(@PathVariable(value = "id") Long id) {
+        Technician tech = tService.findTechById(id);
         if (tech != null) {
             return ResponseEntity.ok().body(tech);
         }

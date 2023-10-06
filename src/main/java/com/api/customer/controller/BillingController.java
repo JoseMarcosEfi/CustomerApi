@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,13 +21,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.api.customer.entities.Billing;
 import com.api.customer.entities.Customer;
 import com.api.customer.entities.Technician;
+import com.api.customer.exceptions.NotFoundException;
 import com.api.customer.respositories.ServiceCallRepository;
 import com.api.customer.services.BillingService;
 import com.api.customer.services.CustomerService;
 import com.api.customer.services.TechnicianService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/billings")
 public class BillingController {
 
@@ -43,12 +46,22 @@ public class BillingController {
     @GetMapping
     public ResponseEntity<List<Billing>> findAll() {
         List<Billing> listBilling = this.bService.findAll();
-
+        Logger logger = LoggerFactory.getLogger(BillingController.class);
         for (Billing billing : listBilling) {
-            Technician tech = technicianService.findById(billing.getIdTechnician());
+
             Customer custom = customerService.findCustomerById(billing.getIdCustomer());
-            billing.setNameTechnician(tech.getName());
-            billing.setNameCustomer(custom.getName());
+            if (custom != null) {
+                billing.setNameCustomer(custom.getName());
+            } else {
+                billing.setNameCustomer("Customer deleted!");
+            }
+            Technician tech = technicianService.findTechById(billing.getIdTechnician());
+            if (tech != null) {
+                billing.setNameTechnician(tech.getName());
+            } else {
+                billing.setNameTechnician("Tech Deleted!");
+            }
+
         }
         return ResponseEntity.ok().body(listBilling);
     }
@@ -57,11 +70,19 @@ public class BillingController {
     public ResponseEntity<Billing> findById(@PathVariable Integer id) {
         Billing obj = this.bService.findById(id);
 
-        Technician tech = technicianService.findById(obj.getIdTechnician());
+        Technician tech = technicianService.findTechById(obj.getIdTechnician());
         Customer custom = customerService.findCustomerById(obj.getIdCustomer());
 
-        obj.setNameCustomer(custom.getName());
-        obj.setNameTechnician(tech.getName());
+        if(custom != null ){
+            obj.setNameCustomer(custom.getName());
+        }else{
+            obj.setNameCustomer("Customer deleted");
+        }
+       if(tech != null){
+           obj.setNameTechnician(tech.getName());
+       }else{
+           obj.setNameTechnician("Tech deleted");
+       }
 
         return ResponseEntity.ok().body((obj));
 

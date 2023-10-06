@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Data
 @AllArgsConstructor
@@ -22,8 +24,10 @@ public class Billing implements Serializable {
     private BigDecimal totalValue;
     private Long idTechnician;
     private Long idCustomer;
-    private Date initialDateBilling;
-    private Date finalDateBilling;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate initialDateBilling;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate finalDateBilling;
     @Transient
     private String nameCustomer;
     @Transient
