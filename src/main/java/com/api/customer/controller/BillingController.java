@@ -46,21 +46,14 @@ public class BillingController {
     @GetMapping
     public ResponseEntity<List<Billing>> findAll() {
         List<Billing> listBilling = this.bService.findAll();
-        Logger logger = LoggerFactory.getLogger(BillingController.class);
+
         for (Billing billing : listBilling) {
 
             Customer custom = customerService.findCustomerById(billing.getIdCustomer());
-            if (custom != null) {
-                billing.setNameCustomer(custom.getName());
-            } else {
-                billing.setNameCustomer("Customer deleted!");
-            }
             Technician tech = technicianService.findTechById(billing.getIdTechnician());
-            if (tech != null) {
-                billing.setNameTechnician(tech.getName());
-            } else {
-                billing.setNameTechnician("Tech Deleted!");
-            }
+            
+            billing.setNameTechnician(tech != null ? tech.getName() : "Technician Deleted");
+            billing.setNameCustomer(custom != null ? custom.getName() : "Customer Deleted");
 
         }
         return ResponseEntity.ok().body(listBilling);
