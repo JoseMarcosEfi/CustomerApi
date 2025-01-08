@@ -3,7 +3,6 @@ package com.api.customer.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.api.customer.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

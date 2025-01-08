@@ -21,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.api.customer.entities.Billing;
 import com.api.customer.entities.Customer;
 import com.api.customer.entities.Technician;
-import com.api.customer.exceptions.NotFoundException;
 import com.api.customer.respositories.ServiceCallRepository;
 import com.api.customer.services.BillingService;
 import com.api.customer.services.CustomerService;
@@ -73,16 +72,16 @@ public class BillingController {
         Technician tech = technicianService.findTechById(obj.getIdTechnician());
         Customer custom = customerService.findCustomerById(obj.getIdCustomer());
 
-        if(custom != null ){
+        if (custom != null) {
             obj.setNameCustomer(custom.getName());
-        }else{
+        } else {
             obj.setNameCustomer("Customer deleted");
         }
-       if(tech != null){
-           obj.setNameTechnician(tech.getName());
-       }else{
-           obj.setNameTechnician("Tech deleted");
-       }
+        if (tech != null) {
+            obj.setNameTechnician(tech.getName());
+        } else {
+            obj.setNameTechnician("Tech deleted");
+        }
 
         return ResponseEntity.ok().body((obj));
 
