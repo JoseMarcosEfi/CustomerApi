@@ -1,6 +1,6 @@
 package com.api.customer.entities;
 
-import jakarta.persistence.Entity;
+import javax.persistence.Entity;
 
 @Entity
 public class Technician extends Person {
